@@ -121,7 +121,7 @@
     t)))
 
 (define (_render-term-cache e f)
-  (with-cache (fresh-term-cache)
+  (with-cache (and (*CACHE?*) (fresh-term-cache))
     #:read (check-cache e)
     #:write (write-cache e)
     f))

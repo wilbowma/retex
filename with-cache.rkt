@@ -29,8 +29,9 @@
                     v)))
         (let ([r (thunk)])
           (when (*CACHE-VERBOSE?*) (printf "[INFO] writing cachefile '~a'~n" cache-file))
-          (with-output-to-file cache-file #:exists 'replace
-            (lambda () (writeln (write-proc r))))
+          (and (*CACHE?*)
+               (with-output-to-file cache-file #:exists 'replace
+                 (lambda () (writeln (write-proc r)))))
           r))))
 
 ;; =============================================================================
