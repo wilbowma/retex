@@ -7,13 +7,14 @@
   syntax/parse)
  scribble/base
  pict
+ typeset-rewriter
  (only-in racket/class new send is-a?/c make-object)
  scribble-latex-utils/utils
  racket/draw
  racket/function
  racket/list
  redex/pict
- "../with-cache.rkt"
+ "with-cache.rkt"
  (only-in rackunit require/expose)
  racket/serialize)
 
@@ -53,7 +54,7 @@
 
 ;; auto-caching off by default
 (*CACHE-VERBOSE?* #f)
-(*CACHE* #f)
+(*CACHE?* #f)
 
 (define fresh-term-cache
   (let ([n 0])
