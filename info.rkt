@@ -1,5 +1,4 @@
 #lang info
-(define collection 'multi)
 (define deps '("base" ("redex-lib" #:version "1.11") "typeset-rewriter" "scribble-lib"
                "redex-pict-lib" "pict" "scribble-latex-utils"))
 (define build-deps '())
