@@ -259,3 +259,5 @@
 
 (define (atomic-greek str)
   (text str (greek-style) (default-font-size)))
+
+;; TODO: Add some rewriters for standard forms, like type-check, validity, lambda, app, snoc-envs
