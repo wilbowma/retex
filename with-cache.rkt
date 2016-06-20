@@ -9,8 +9,9 @@
 (provide (all-defined-out))
 
 ;; If #f, do not cache anything
-(define *CACHE?* (make-parameter #t))
-(define *CACHE-VERBOSE?* (make-parameter #t))
+;; auto-caching off by default
+(define *CACHE?* (make-parameter #f))
+(define *CACHE-VERBOSE?* (make-parameter #f))
 
 (define ((cache-read-error cache-file) exn)
   (printf "[WARNING] Failed to read cachefile '~a', got exception:\n\t~a\n" cache-file (exn-message exn))

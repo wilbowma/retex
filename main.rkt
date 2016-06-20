@@ -22,7 +22,9 @@
 (require/expose redex/private/core-layout (compound-rewrite-table atomic-rewrite-table))
 
 (provide
- (all-defined-out))
+ (all-defined-out)
+ *CACHE?*
+ *CACHE-VERBOSE?*)
 
 ;; Not yet properly defined; need more research into (La)TeX. And probably would be better to render
 ;; directly to (La)TeX from Redex.
@@ -52,15 +54,11 @@
 (paren-style mathrm-style)
 (grammar-style textbf-style)
 
-;; auto-caching off by default
-(*CACHE-VERBOSE?* #f)
-(*CACHE?* #f)
-
 (define fresh-term-cache
   (let ([n 0])
     (lambda ()
       (set! n (add1 n))
-      (format "~aretex-cache/cache~a.fasl" (current-dest-directory) n))))
+      (format "~a/retex-cache/cache~a.fasl" (current-dest-directory) n))))
 
 (define (serialize-color e)
   (if ((is-a?/c color%) e)
