@@ -262,3 +262,36 @@
   (text str (greek-style) (default-font-size)))
 
 ;; TODO: Add some rewriters for standard forms, like type-check, validity, lambda, app, snoc-envs
+
+(define substitute-rw
+  (rw-lambda
+   [`(substitute ,e1 ,x ,e2) =>
+    `(""
+      ,e1 "["
+      ,(set-column e2 values x) "/"
+      ,(set-column x (curry + (lw-column-span e2) -2) e2) "]"
+      "")]))
+
+(define valid-rw
+  (rw-lambda
+   [`(valid ,Δ) =>
+    `("" " ⊢ " ,Δ "")]))
+
+(define wf-rw
+  (rw-lambda
+   [`(wf ,Δ ,Γ) =>
+    `("" ,Δ " ⊢ " ,Γ "")]))
+
+;; TODO: Abstract w.r.t. number of ; separated contexts, name of judgment
+;; NB: name of judgment requires either macros, or tweaks to typeset-rewriter
+(define type-infer-rw
+  (rw-lambda 
+   [`(type-infer ,Δ ,Γ ,e ,t) =>
+    `("" ,Δ ";" ,Γ " ⊢ " ,e " ⇒ " ,t "")]))
+
+;; TODO: Abstract w.r.t. number of ; separated contexts, name of judgment
+;; NB: name of judgment requires either macros, or tweaks to typeset-rewriter
+(define type-check-rw
+  (rw-lambda 
+   [`(type-check ,Δ ,Γ ,e ,t) =>
+    `("" ,Δ ";" ,Γ " ⊢ " ,e " ⇐ " ,t "")]))
