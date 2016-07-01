@@ -38,7 +38,7 @@
 (define upgreek-style (make-parameter (cons "CMU Serif, Neo Euler, LM Roman 17, CMU Serif" 'roman)))
 
 ;; LaTeX fonts screw up the bounding boxes; correct them
-(current-render-pict-adjust
+#;(current-render-pict-adjust
  (λ (x sym)
    (case sym
      [('language-line) x]
@@ -220,11 +220,13 @@
      #`(parameterize ([judgment-form-cases '(#,i)]
                       ;; TODO: LaTeX fonts screw up bounding boxes, adjust
                       ;; NB: current-render-pict-adjust does not affect where-combine, manually correct.
-                      [where-combine
+                      ;; TODO: Having these in a place that the user cannot disable them is a bad
+                      ;; idea, but having the user play with them is also a bad idea.
+                      #;[where-combine
                        (compose
                         (λ (x) (inset x 0 -7 0 0))
                         (where-combine))]
-                      [current-render-pict-adjust
+                      #;[current-render-pict-adjust
                        (λ (x sym)
                          (inset x 0 -6 0 0))])
          (render-judgment-form-cache #,j))
