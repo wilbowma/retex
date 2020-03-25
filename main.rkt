@@ -56,7 +56,7 @@
   (let ([n 0])
     (lambda ()
       (set! n (add1 n))
-      (cachefile (format "retex-cache/cache~a.fasl" n)))))
+      (cachefile (format "retex-cache~a.fasl" n)))))
 
 (define (serialize-color e)
   (if ((is-a?/c color%) e)
