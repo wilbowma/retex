@@ -2,7 +2,7 @@
 A package for Redex that looks like LaTeX
 
 # Disclaimer:
-This package's API likely to change without notice. Requires packages not on the catalog, like https://github.com/dented42/scribble-latex-utils
+This package's API likely to change without notice.
 
 # Usage:
 Documentation to come. For usage examples, see

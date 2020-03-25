@@ -9,12 +9,12 @@
  pict
  typeset-rewriter
  (only-in racket/class new send is-a?/c make-object)
- scribble-latex-utils/utils
+ latex-utils/scribble
  racket/draw
  racket/function
  racket/list
  redex/pict
- "with-cache.rkt"
+ with-cache
  (only-in rackunit require/expose)
  racket/serialize)
 
@@ -22,9 +22,7 @@
 (require/expose redex/private/core-layout (compound-rewrite-table atomic-rewrite-table))
 
 (provide
- (all-defined-out)
- *CACHE?*
- *CACHE-VERBOSE?*)
+ (all-defined-out))
 
 ;; Not yet properly defined; need more research into (La)TeX. And probably would be better to render
 ;; directly to (La)TeX from Redex.
@@ -58,7 +56,7 @@
   (let ([n 0])
     (lambda ()
       (set! n (add1 n))
-      (format "~a/retex-cache/cache~a.fasl" (current-dest-directory) n))))
+      (cachefile (format "retex-cache/cache~a.fasl" n)))))
 
 (define (serialize-color e)
   (if ((is-a?/c color%) e)
@@ -121,7 +119,7 @@
     t)))
 
 (define (_render-term-cache e f)
-  (with-cache (and (*CACHE?*) (fresh-term-cache))
+  (with-cache (fresh-term-cache)
     #:read (check-cache e)
     #:write (write-cache e)
     f))
